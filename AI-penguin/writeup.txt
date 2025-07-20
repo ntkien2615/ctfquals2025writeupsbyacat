@@ -22,7 +22,7 @@ Gemini: Ô kê bạn ơi!
 
 Và gemini (lúc này là gemini-flash) đã hào phóng cho 5 cái ảnh (thực ra là 100).
 
-Nạp 5 cái ảnh và process_penguins vào process_penguins.py thu được các file json trong thư mục output_json
+Nạp 5 cái ảnh và process_penguins vào process_penguins.py thu được các file json trong thư mục output_json (chứa pixel màu của mấy cái ảnh đó)
 
 Dùng send_submissions.py để tự động POST lên server ta thu được kết quả:
 
