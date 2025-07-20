@@ -1,0 +1,44 @@
+This is the penguin drawing challenge ("")>
+
+The target website is a pixel art drawing site.
+
+Looking in ./src, it indeed uses two models: ShuffleNet V2 x2.0 and Regnet X 1.6F in the ./models directory.
+
+The flag is split into 4 parts:
+
+- If both models do NOT recognize the drawing as a penguin → you get part 1 of the flag.
+- If both models DO recognize it as a penguin → you get part 2 of the flag.
+- If model 1 recognizes, but model 2 does NOT → you get part 3 of the flag.
+- If model 1 does NOT recognize, but model 2 does → you get part 4 of the flag.
+
+Everyone in the team who drew by hand got 0 points :(((
+
+How to solve:
+- Collect sample penguin images (I asked Gemini to draw penguins for me).
+
+Prompt: Create a cute, adorable, lovely, cheese-stick penguin pixel art, 128x128.
+
+Gemini: Okay, here you go!
+
+And Gemini (at that time, gemini-flash) generously gave 5 images (actually 100).
+
+Load 5 images and process them with process_penguins.py to get JSON files in the output_json directory (containing the pixel colors of those images).
+
+Use send_submissions.py to automatically POST to the server and get results:
+
+S D:\art\Public> & C:/Python313/python.exe d:/art/Public/send_submissions.py
+Sending D:/art/Public/output_json\unnamed (1).json...
+Response for unnamed (1).json: 200 - {'flag_part': 'HCMUS-CTF{yO', 'judge_score': 0.0, 'success': True}
+Sending D:/art/Public/output_json\unnamed (2).json...
+Response for unnamed (2).json: 200 - {'flag_part': 'U_ArE_a_M4$7', 'judge_score': 32.39, 'success': True}
+Sending D:/art/Public/output_json\unnamed (3).json...
+Response for unnamed (3).json: 200 - {'flag_part': 'N_dr4W!n9!!}', 'judge_score': 3.31, 'success': True}
+Sending D:/art/Public/output_json\unnamed (4).json...
+Response for unnamed (4).json: 200 - {'flag_part': 'eR_0f_p3NGu!', 'judge_score': 4.32, 'success': True}
+Sending D:/art/Public/output_json\unnamed.json...
+Response for unnamed.json: 200 - {'flag_part': 'U_ArE_a_M4$7', 'judge_score': 24.89, 'success': True}
+All JSON files processed.
+PS D:\art\Public>
+
+Boom, time to change my avatar!
+HCMUS-CTF{yOU_ArE_a_M4$7eR_0f_p3NGu!N_dr4W!n9!!} 

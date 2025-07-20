@@ -7,3 +7,5 @@ Phần writeup để đọc là các writeup.txt trong từng thư mục, nghĩa
 Thân ái, 
 
 Mèo
+
+P/s: peguin có tên đúng là PixelPingu
