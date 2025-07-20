@@ -1,0 +1,44 @@
+Đây là bài vẽ chim cánh cụt ("")>
+
+Trang web đích là trang web vẽ dạng pixel
+
+Quan sát trong ./src thì đúng là dùng 2 mô hình ShuffleNet V2 x2.0 và Regnet X 1.6F trong thư mục ./models
+
+Flag bị chia ra thành 4 phần:
+
+Nếu cả hai đều không nhận ra là chim cánh cụt → trả về phần 1 của flag.
+Nếu cả hai đều nhận ra là chim cánh cụt → trả về phần 2 của flag.
+Nếu mô hình 1 nhận ra, mô hình 2 không nhận ra → trả về phần 3 của flag.
+Nếu mô hình 1 không nhận ra, mô hình 2 nhận ra → trả về phần 4 của flag.
+
+Trong team ai vẽ tay cũng bị chấm 0đ cả :(((
+
+Cách làm:
+- Thu thập ảnh penguins mẫu (ở đây mình kêu con gemini vẽ ảnh penguin)
+
+Promt: Tạo cho tui ảnh cánh cụt dễ thương hột me đáng iu phô mai que pixel 128x128
+
+Gemini: Ô kê bạn ơi!
+
+Và gemini (lúc này là gemini-flash) đã hào phóng cho 5 cái ảnh (thực ra là 100).
+
+Nạp 5 cái ảnh và process_penguins vào process_penguins.py thu được các file json trong thư mục output_json
+
+Dùng send_submissions.py để tự động POST lên server ta thu được kết quả:
+
+S D:\art\Public> & C:/Python313/python.exe d:/art/Public/send_submissions.py
+Sending D:/art/Public/output_json\unnamed (1).json...
+Response for unnamed (1).json: 200 - {'flag_part': 'HCMUS-CTF{yO', 'judge_score': 0.0, 'success': True}
+Sending D:/art/Public/output_json\unnamed (2).json...
+Response for unnamed (2).json: 200 - {'flag_part': 'U_ArE_a_M4$7', 'judge_score': 32.39, 'success': True}
+Sending D:/art/Public/output_json\unnamed (3).json...
+Response for unnamed (3).json: 200 - {'flag_part': 'N_dr4W!n9!!}', 'judge_score': 3.31, 'success': True}
+Sending D:/art/Public/output_json\unnamed (4).json...
+Response for unnamed (4).json: 200 - {'flag_part': 'eR_0f_p3NGu!', 'judge_score': 4.32, 'success': True}
+Sending D:/art/Public/output_json\unnamed.json...
+Response for unnamed.json: 200 - {'flag_part': 'U_ArE_a_M4$7', 'judge_score': 24.89, 'success': True}
+All JSON files processed.
+PS D:\art\Public> 
+
+Boom, đi đổi avatar luôn đây! 
+HCMUS-CTF{yOU_ArE_a_M4$7eR_0f_p3NGu!N_dr4W!n9!!}
